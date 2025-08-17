@@ -1,0 +1,14 @@
+# Backend (Spring Boot)
+/backend/target/
+*.log
+
+# Frontend (React)
+/clientfrontend/node_modules/
+/clientfrontend/build/
+/carrentfrontend/node_modules/
+/carrentfrontend/build/
+
+# Docker
+*.pid
+*.sock
+*.tmp

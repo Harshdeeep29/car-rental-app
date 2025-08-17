@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: demo1
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Gorade@123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: backend
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demo1
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Gorade@123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SERVER_PORT: 9090
+      SPRING_APPLICATION_NAME: backend
+    ports:
+      - "9090:9090"
+
+  clientfrontend:
+    build: ./clientfrontend
+    container_name: clientfrontend
+    ports:
+      - "5000:80"
+
+  carrentfrontend:
+    build: ./carrentfrontend
+    container_name: carrentfrontend
+    ports:
+      - "3000:80"
+
+volumes:
+  pgdata:

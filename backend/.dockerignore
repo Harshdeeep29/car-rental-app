@@ -1,0 +1,6 @@
+target
+*.log
+*.iml
+.git
+.gitignore
+docker-compose.yml
